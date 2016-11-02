@@ -7,23 +7,37 @@
 # Difficulty: easy.
 
 def longest_word(sentence)
-	r = 0
 	ary = sentence.split(' ')
-	i  = ary.length - 1 
-	while i > 0 
-		if 	ary[i].length > ary[i-1].length
-		 
-			r = i
-		elsif ary[i].length < ary[i-1].length
-			r = i - 1
+	longest = ''
+	ary.map do
+		|word|
+		if word.length > longest.length
+			longest = word
 		end
-		i -= 1
 	end
-	
-	answer = ary[r]
-	
-	p answer
+
+longest	
 end
+
+
+# def longest_word(sentence)
+# 	r = 0
+# 	ary = sentence.split(' ')
+# 	i  = ary.length - 1 
+# 	while i > 0 
+# 		if 	ary[i].length > ary[i-1].length
+		 
+# 			r = i
+# 		elsif ary[i].length < ary[i-1].length
+# 			r = i - 1
+# 		end
+# 		i -= 1
+# 	end
+	
+# 	answer = ary[r]
+	
+# 	p answer
+# end
 
 # These are tests to check that your code is working. After writing
 # your solution, they should all print true.
