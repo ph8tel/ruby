@@ -27,17 +27,24 @@ def most_common_letter(string)
  solution
 
 end
+# or 
+def most_common_letter(string)
+	answer = [0, 0]
+	ary = string.split('')
+	ary.each do
+		|letter|
+		difference = string.length - string.delete(letter).length 
+		if difference > answer[1]
+			answer[0] = letter
+			answer[1] = difference
+		end
+	end
+answer
+end
 
-# These are tests to check that  code is working.
-
-puts("\nTests for #most_common_letter")
-puts("===============================================")
-    puts(
-      'most_common_letter("abca") == ["a", 2]: ' +
-      (most_common_letter('abca') == ['a', 2]).to_s
-    )
-    puts(
-      'most_common_letter("abbab") == ["b", 3]: ' +
-      (most_common_letter('abbab') == ['b', 3]).to_s
-    )
-puts("===============================================")
+puts "This program checks a string for the most common letter"
+puts "Please enter the string:"
+string = gets.chomp
+puts "The most common letter in the string:"
+puts "#{string} is:"
+puts "#{most_common_letter(string)[0]} that appears #{most_common_letter(string)[1]} times"
