@@ -1,44 +1,88 @@
-# letters that appear more than once in the string. You may assume
-# the string contains only lowercase letters. Count the number of
-# letters that repeat, not the number of times they repeat in the
-# string.
-#
-# Difficulty: hard.
-
 def num_repeats(string)
-	ary = []
-	count = 0
-	idx =  string.length - 1 
-	while idx >= 0 
-	  check = string[idx]
-	  puts "before #{string}"
-	  puts "checking #{check}"
-	  string[idx] = '!'
-	  puts "after #{string}"
-	  	if ary.include?(check) 
-	  		puts "already checked"
-	  	elsif string.include?(check)
-	  		puts " true"
-	  		ary.push(check)
-	  		count += 1
-	  	else
-	  		puts "false"
-	  	end
-	  	string[idx] = check
-	  idx -= 1 
-	 end
-	 p count 
-		
+ary = string.split('')
+reps = []
+
+ary.each do
+	|letter|
+	if ( string.delete(letter).length < ( string.length - 1 )  && !reps.include?(letter) )
+		reps << letter 
+	end
 end
 
-# These are tests to check that your code is working. After writing
-# your solution, they should all print true.
-puts("\nTests for #num_repeats")
-puts("===============================================")
-    puts('num_repeats("abdbc") == 1: ' + (num_repeats('abdbc') == 1).to_s)
-    # one character is repeated
-    puts('num_repeats("aaa") == 1: ' + (num_repeats('aaa') == 1).to_s)
-    puts('num_repeats("abab") == 2: ' + (num_repeats('abab') == 2).to_s)
-    puts('num_repeats("cadac") == 2: ' + (num_repeats('cadac') == 2).to_s)
-    puts('num_repeats("abcde") == 0: ' + (num_repeats('abcde') == 0).to_s)
-puts("===============================================")
+answer = reps.length		
+end
+
+
+# def num_repeats(string)
+# ary = string.split('')
+# reps = []
+# ary.each do
+# 	|letter|
+# 	string[string.index(letter)] = '~'
+# 	ary = string.split('')
+# 	if ary.include?(letter)
+# 		if !reps.include?(letter)
+# 			reps << letter
+# 		end
+# 	end
+# 	string.gsub!('~', letter)
+	
+# end
+# answer = reps.length
+		
+# end
+
+
+# def num_repeats(string)
+# 	ary = []
+# 	count = 0
+# 	idx =  string.length - 1 
+# 	while idx >= 0 
+# 	  check = string[idx]
+# 	  puts "before #{string}"
+# 	  puts "checking #{check}"
+# 	  string[idx] = '!'
+# 	  puts "after #{string}"
+# 	  	if ary.include?(check) 
+# 	  		puts "already checked"
+# 	  	elsif string.include?(check)
+# 	  		puts " true"
+# 	  		ary.push(check)
+# 	  		count += 1
+# 	  	else
+# 	  		puts "false"
+# 	  	end
+# 	  	string[idx] = check
+# 	  idx -= 1 
+# 	 end
+# 	 p count 
+		
+# end
+
+
+
+# def num_repeats(string)
+# 	ary = string.split('')
+# 	count = 0
+# 	ary.each do 
+# 		|letter|
+# 		puts "testing #{letter}"
+# 		puts "#{string[string.index(letter)]} turned to ~"
+	
+# 			string[string.index(letter)] = nil
+# 				puts "string is now #{string}"
+# 			ary = string.split('')
+# 			if ary.include?(letter)
+# 				puts "found it"
+# 				count += 1
+# 			end
+# 			string.gsub!(nil, letter)
+# 		end
+# p count
+# end
+
+puts "\nTests for how many letters that repeat in a string"
+puts "Please enter the string to check: "
+string = gets.chomp
+
+p num_repeats(string)

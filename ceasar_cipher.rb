@@ -1,56 +1,68 @@
-# Write a method that takes in an integer `offset` and a string.
-# Produce a new string, where each letter is shifted by `offset`. You
-# may assume that the string contains only lowercase letters and
-# spaces.
-#
-# When shifting "z" by three letters, wrap around to the front of the
-# alphabet to produce the letter "c".
-#
-# You'll want to use String's `ord` method and Integer's `chr` method.
-# `ord` converts a letter to an ASCII number code. `chr` converts an
-# ASCII number code to a letter.
-#
-# You may look at the ASCII printable characters chart:
-#
-#     http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
-#
-# Notice that the letter 'a' has code 97, 'b' has code 98, etc., up to
-# 'z' having code 122.
-#
-# You may also want to use the `%` modulo operation to handle wrapping
-# of "z" to the front of the alphabet.
-#
-# Difficulty: hard. Because this problem relies on outside
-# information, we would not give it to you on the timed challenge. :-)
-
 def caesar_cipher(offset, string)
-	idx = (string.length - 1)
-	while idx >= 0 
-		if string[idx] == ' '
-			string[idx] = ' '
-		elsif string[idx].ord > (122 - offset)
-			r = (string[idx].ord % 120) + 97
-			string[idx] = r.chr
-		else
-			r = string[idx].ord + offset
-			string[idx] = r.chr 
-		end
-		idx -= 1 
-	end
-	p	string
+#this code creates an alphabet of 26 letters a-z
+	alphabet = Array.new
+	26.times {|idx| alphabet << (idx + 97).chr } 
+
+	string.length.times { |idx| string[idx] = alphabet[ ( alphabet.index(string[idx]) + offset ) % alphabet.length ] }
+
+string
 end
 
-# These are tests to check that your code is working. After writing
-# your solution, they should all print true.
+def decrypt(offset, string)
+#this code creates an alphabet of 26 letters a-z
+	alphabet = Array.new
+	26.times {|idx| alphabet << (idx + 97).chr } 
 
-puts("\nTests for #caesar_cipher")
-puts("===============================================")
-    puts(
-      'caesar_cipher(3, "abc") == "def": ' +
-      (caesar_cipher(3, 'abc') == 'def').to_s
-    )
-    puts(
-      'caesar_cipher(3, "abc xyz") == "def abc": ' +
-      (caesar_cipher(3, 'abc xyz') == 'def abc').to_s
-    )
-puts("===============================================")
+	string.length.times {|idx| string[idx] = alphabet[ ( alphabet.index(string[idx]) - offset ) % alphabet.length ] }
+
+string
+end
+puts "This is an encryption program that shifts the values of letters"
+puts "by an indicated amount. So abc entered with 3 produces def."
+puts "Enter string to be encrypted"
+string = gets.chomp
+puts "Enter shift value:"
+shift = Integer(gets)
+
+p r = caesar_cipher(shift, string)
+puts "decrypted:"
+p decrypt(shift,r)
+
+#this on is almost there
+# def caesar_cipher(offset, string)
+# 	if offset > 26
+# 		offset = offset % 26
+# 	end
+
+# 	idx = 0
+# 	while idx < string.length
+# 		if ( string[idx].ord + offset ) > 122
+# 			string[idx] = (string[idx].ord + (offset  - 26 ) ).chr
+# 		elsif string[idx] == 32
+# 			string[idx] = ' '
+# 		else	
+# 		   string[idx] = (string[idx].ord + offset).chr
+# 		end
+# 		idx += 1
+# 	end
+
+#  string
+# end
+
+# def caesar_cipher(offset, string)
+# 	idx = (string.length - 1)
+# 	while idx >= 0 
+# 		if string[idx] == ' '
+# 			string[idx] = ' '
+# 		elsif string[idx].ord > (122 - offset)
+# 			r = (string[idx].ord % 120) + 97
+# 			string[idx] = r.chr
+# 		else
+# 			r = string[idx].ord + offset
+# 			string[idx] = r.chr 
+# 		end
+# 		idx -= 1 
+# 	end
+# string
+# end
+
