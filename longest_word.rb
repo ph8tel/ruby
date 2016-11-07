@@ -1,12 +1,6 @@
 def longest_word(sentence)
-	ary = sentence.split(' ')
-	longest = ''
-	ary.map do
-		|word|
-		if word.length > longest.length
-			longest = word
-		end
-	end
+	longest = String.new
+	sentence.split(' ').map {	|word| longest = word if word.length > longest.length }
 
 longest	
 end

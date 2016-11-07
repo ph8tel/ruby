@@ -1,14 +1,10 @@
 def scramble_string(string, positions)
-new_str = []
+holder = []
 
-idx = 0
-while idx <= string.length - 1 
-	new_str[positions[idx]] = string[idx]
-	idx += 1 
-end
+string.length.times {|idx| holder[positions[(idx -1)]] = string[(idx -1)]}
 
-answer = new_str.join
-answer
+answer = holder.join
+
 end
-puts " testing 'abcd' assigned to positions [3, 1, 2, 0]"
-p scramble_string("abcd", [3, 1, 2, 0]
+puts " testing 'xnlui', assigned to positions [4, 2, 0, 3, 1]"
+p scramble_string("xnlui", [4, 2, 0, 3, 1])
