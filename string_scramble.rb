@@ -1,21 +1,13 @@
-# Write a method that takes in a string and an array of indices in the
-# string. Produce a new string, which contains letters from the input
-# string in the order specified by the indices of the array of indices.
-#
-# Difficulty: medium.
-
 def scramble_string(string, positions)
-
 new_str = []
 
 idx = 0
-while idx <= string.length - 1 
+while idx < string.length  
 	new_str[positions[idx]] = string[idx]
 	idx += 1 
 end
 
 answer = new_str.join
-p answer
 answer
 end
 
