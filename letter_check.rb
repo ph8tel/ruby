@@ -2,12 +2,7 @@ def num_repeats(string)
 ary = string.split('')
 reps = []
 
-ary.each do
-	|letter|
-	if ( string.delete(letter).length < ( string.length - 1 )  && !reps.include?(letter) )
-		reps << letter 
-	end
-end
+ary.each {	|letter| reps << letter if  string.delete(letter).length < ( string.length - 1 )  && !reps.include?(letter) }
 
 answer = reps.length		
 end
