@@ -11,19 +11,8 @@ def translate(letter)
 end
 
 def morse_encode(str)
-
-	a = str.delete(' ').split('')
-	p a
-
-	a.map! do
-		 |letter| 
-		 translate(letter) + " "
-		end
-		p a
-		 r = a.join(' ')
-		 e = r[0..-2]
-		 p e
-
+	a = str.split('').map! { |letter| translate(letter) + " "}.join.gsub('  ', ' ')
+a[0..-2]
 end
 
-morse_encode("the cat in the hat")
+#morse_encode("the cat in the hat")
