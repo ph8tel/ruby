@@ -1,7 +1,7 @@
-def word_unscrambler(word, dictionary)
+def anagram_finder(word, dictionary)
 	ag = []
 dictionary.each {|x| ag << x if word.split('').sort == x.split('').sort }
 ag
 end
 
- p word_unscrambler("cat", ["tic", "toc", "tac", "toe"])
+ p anagram_finder("cat", ["tic", "toc", "tac", "toe"])

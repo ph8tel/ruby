@@ -1,11 +1,12 @@
-require '02_letter_count'
+# github.com/ph8tel
+
+require '../letter_count'
 require 'rspec'
 
-# Write a function, `letter_count(str)` that takes a string and
-# returns a hash mapping each letter to its frequency. Do not include
+# `letter_count(str)` takes a string and returns a 
+# hash mapping each letter to its frequency. Excluding
 # spaces.
 #
-# Difficulty: 1/5
 
 describe "#letter_count" do
   it "handles a simple case" do

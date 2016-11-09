@@ -1,4 +1,6 @@
-require '07_rectangle_intersection'
+# github.com/ph8tel
+
+require '../area_overlap.rb'
 require 'rspec'
 
 # Write a function, `rec_intersection(rect1, rect2)` and returns the
