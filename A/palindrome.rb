@@ -1,3 +1,5 @@
+# github.com/ph8tel
+
 def palindrome?(string)
 answer = false
 
@@ -11,6 +13,6 @@ end
 	answer
 end
 
-puts "Enter word for palindrome check:"
-string = gets.chomp
-p palindrome?(string)
+# puts "Enter word for palindrome check:"
+# string = gets.chomp
+# p palindrome?(string)
