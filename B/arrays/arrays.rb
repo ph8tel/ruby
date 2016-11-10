@@ -4,4 +4,4 @@ ret = Array.new
 	p ret
 end
 
-#my_uniq([1, 2, 1, 3, 3])
+my_uniq([1, 2, 1, 3, 3])
