@@ -36,30 +36,38 @@ end
 #  all the discs, to the final pile. If so, they win!
 def towers_oVal(orig, a, b, c)
 	case orig
-		when 'a' 
-			oVal =   a[-1]
-		when 'b' 
-			oVal =   b[-1]
-		when 'c' 
-			oVal =   c[-1]
+		when 'a' then	oVal =   a[-1]
+		when 'b' then	oVal =   b[-1]
+		when 'c' then	oVal =   c[-1]
+		else
+			return nil
 	end
 oVal
 end
 def towers_dVal(des, a, b, c)
+
 	case des
 		when 'a' then dVal = a[-1]
 		when 'b' then dVal = b[-1]
 		when 'c' then dVal = c[-1]
+		else
+			return nil
 	end
+	
+	if !a.last || !b.last || !c.last
 	dVal = 10 if !dVal
 dVal
 end
+
 def towers
 	a = [3,2,1]
 	b = []
 	c = []
+
 	until b.length == 3 || c.length == 3
 		puts "Current: A:#{a} B:#{b} C:#{c}"
+		orig = 'd'
+	#while orig.include?('a' ||'b'||'c'||'d')
 		puts "move from:"
 		orig = gets.chomp
 		oVal = towers_oVal(orig, a, b, c)
@@ -68,23 +76,25 @@ def towers
 		des = gets.chomp
 		dVal= towers_dVal(des, a, b, c)
 		
-			if   oVal > dVal
-				puts "Illegal move"
-				puts "#{oVal} is oval and #{dVal} is dVal"
-		elsif des == 'a' && orig == 'b' 
-			a << b.pop
-		elsif des == 'a' && orig == 'c'
-			a << c.pop
-		elsif des == 'b' && orig == 'a' 
-			b << a.pop
-		elsif des == 'b' && orig == 'c'
-		b  << c.pop
-		elsif des == 'c' && orig == 'a'
-			c << a.pop
-		elsif des == 'c' && orig == 'b'
-			c << b.pop
-		end
+			if !oVal || !dVal
+				puts "bad input"   
+			elsif	oVal > dVal
+				if des == 'a' && orig == 'b' 
+					a << b.pop
+				elsif des == 'a' && orig == 'c'
+					a << c.pop
+				elsif des == 'b' && orig == 'a' 
+					b << a.pop
+				elsif des == 'b' && orig == 'c'
+					b  << c.pop
+				elsif des == 'c' && orig == 'a'
+					c << a.pop
+				elsif des == 'c' && orig == 'b'
+					c << b.pop
+				end
+			end
 	end
 	puts "You won! bye"
 end	
+
 towers
