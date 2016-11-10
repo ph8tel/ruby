@@ -25,26 +25,59 @@ def zero_sum(arr)
 	end
 r 
 end
+#p zero_sum([1, 2, 1, 3, 3, -1]) == true
 
-#p zero_sum([1, 2, 1, 3, 3])
-p zero_sum([1, 2, 1, 3, 3, -1])
-#p zero_sum([1, 2, 1, 3, 3, 0, 0])
-
-#ar2 = arr
-
-# 		arr.each do |num|
-# 			puts "num is #{num} arr before and after to follow"
-# 			p arr
-# 			ar2.delete_at(0)
-# 			p ar2
-# 			 ar2.each do |x| 
-# 				puts "matching #{num} + #{x} = #{num + x }"
-
-# 	   if  (num + x) == 0 
-# 				puts "zero #{num} 	+ #{x}"
-# 				r = true
-# 			else
-# 				puts "no" 
-# 			end
-# 		end
-# 		end
+# Keep three arrays, which represents the piles of discs.
+# Pick a representation of the discs to store in the arrays;
+#  maybe just a number representing their size.
+# In a loop, prompt the user (using gets) and ask what pile 
+# to select a disc from, and where to put it.
+# After each move, check to see if they have succeeded in moving
+#  all the discs, to the final pile. If so, they win!
+def towers
+	a = [4,3,2,1]
+	b = []
+	c = []
+	until b.length == 4 || c.length == 4
+		puts "Current: A:#{a} B:#{b} C:#{c}"
+		puts "move from:"
+		orig = gets.chomp
+			case orig
+			when 'a' 
+				oVal =  !a[-1] ? 7000 : a[-1]
+			when 'b' then oVal = b[-1]
+				oVal =  !b[-1] ? 7000 : b[-1]
+			when 'c' 
+				oVal =  !c[-1] ? 7000 : c[-1]
+			end
+		puts "move to:"
+		des = gets.chomp
+			case des
+			when 'a' then dVal = a[-1]
+			 dVal = !a[-1] ? 7 : b[-1]
+			when 'b' 
+			 dVal = !b[-1] ? 7 : b[-1]
+			when 'c' 
+			 dVal = !c[-1] ? 7 : b[-1]
+			
+			end
+		
+			if  oVal > dVal
+				puts "Illegal move"
+		elsif des == 'a' && orig == 'b' 
+			a << b.pop
+		elsif des == 'a' && orig == 'c'
+			a << c.pop
+		elsif des == 'b' && orig == 'a' 
+			b << a.pop
+		elsif des == 'b' && orig == 'c'
+			b << c.pop
+		elsif des == 'c' && orig == 'a'
+			c << a.pop
+		elsif des == 'c' && orig == 'b'
+			c << b.pop
+		end
+	end
+	
+end	
+towers
