@@ -34,35 +34,43 @@ end
 # to select a disc from, and where to put it.
 # After each move, check to see if they have succeeded in moving
 #  all the discs, to the final pile. If so, they win!
-def towers
-	a = [4,3,2,1]
-	b = []
-	c = []
-	until b.length == 4 || c.length == 4
-		puts "Current: A:#{a} B:#{b} C:#{c}"
-		puts "move from:"
-		orig = gets.chomp
+def towers_oVal(orig)
 			case orig
 			when 'a' 
-				oVal =  !a[-1] ? 7000 : a[-1]
+				oVal =  !a[-1] ? 10 : a[-1]
 			when 'b' then oVal = b[-1]
-				oVal =  !b[-1] ? 7000 : b[-1]
+				oVal =  !b[-1] ? 10  : b[-1]
 			when 'c' 
-				oVal =  !c[-1] ? 7000 : c[-1]
+				oVal =  !c[-1] ? 10 : c[-1]
 			end
+	oVal
+end
+def towers_dVal(des)
+case des
+			when 'a' then dVal = a[-1]
+			 dVal = !a[-1] ? 10 : b[-1]
+			when 'b' 
+			 dVal = !b[-1] ? 10 : b[-1]
+			when 'c' 
+			 dVal = !c[-1] ? 10 : b[-1]
+			end
+	dVal
+end
+def towers
+	a = [10,3,2,1]
+	b = [10]
+	c = [10]
+	until b.length == 4 || c.length == 4
+		puts "Current: A:#{a[1..-1]} B:#{b[1..-1]} C:#{c[1..-1]}"
+		puts "move from:"
+		orig = gets.chomp
+		oval = towers_oval(orig)
+
 		puts "move to:"
 		des = gets.chomp
-			case des
-			when 'a' then dVal = a[-1]
-			 dVal = !a[-1] ? 7 : b[-1]
-			when 'b' 
-			 dVal = !b[-1] ? 7 : b[-1]
-			when 'c' 
-			 dVal = !c[-1] ? 7 : b[-1]
-			
-			end
+		dVal =towers_dVal(des)
 		
-			if  oVal > dVal
+			if  !dVal || oVal > dVal
 				puts "Illegal move"
 		elsif des == 'a' && orig == 'b' 
 			a << b.pop
@@ -78,6 +86,6 @@ def towers
 			c << b.pop
 		end
 	end
-	
+	puts "You won! bye"
 end	
 towers
