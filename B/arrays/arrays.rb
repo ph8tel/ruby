@@ -32,46 +32,45 @@ end
 #  maybe just a number representing their size.
 # In a loop, prompt the user (using gets) and ask what pile 
 # to select a disc from, and where to put it.
-# After each move, check to see if they have succeeded in moving
+# or each move, check to see if they have succeeded in moving
 #  all the discs, to the final pile. If so, they win!
-def towers_oVal(orig)
-			case orig
-			when 'a' 
-				oVal =  !a[-1] ? 10 : a[-1]
-			when 'b' then oVal = b[-1]
-				oVal =  !b[-1] ? 10  : b[-1]
-			when 'c' 
-				oVal =  !c[-1] ? 10 : c[-1]
-			end
-	oVal
+def towers_oVal(orig, a, b, c)
+	case orig
+		when 'a' 
+			oVal =   a[-1]
+		when 'b' 
+			oVal =   b[-1]
+		when 'c' 
+			oVal =   c[-1]
+	end
+oVal
 end
-def towers_dVal(des)
-case des
-			when 'a' then dVal = a[-1]
-			 dVal = !a[-1] ? 10 : b[-1]
-			when 'b' 
-			 dVal = !b[-1] ? 10 : b[-1]
-			when 'c' 
-			 dVal = !c[-1] ? 10 : b[-1]
-			end
-	dVal
+def towers_dVal(des, a, b, c)
+	case des
+		when 'a' then dVal = a[-1]
+		when 'b' then dVal = b[-1]
+		when 'c' then dVal = c[-1]
+	end
+	dVal = 10 if !dVal
+dVal
 end
 def towers
-	a = [10,3,2,1]
-	b = [10]
-	c = [10]
-	until b.length == 4 || c.length == 4
-		puts "Current: A:#{a[1..-1]} B:#{b[1..-1]} C:#{c[1..-1]}"
+	a = [3,2,1]
+	b = []
+	c = []
+	until b.length == 3 || c.length == 3
+		puts "Current: A:#{a} B:#{b} C:#{c}"
 		puts "move from:"
 		orig = gets.chomp
-		oval = towers_oval(orig)
+		oVal = towers_oVal(orig, a, b, c)
 
 		puts "move to:"
 		des = gets.chomp
-		dVal =towers_dVal(des)
+		dVal= towers_dVal(des, a, b, c)
 		
-			if  !dVal || oVal > dVal
+			if   oVal > dVal
 				puts "Illegal move"
+				puts "#{oVal} is oval and #{dVal} is dVal"
 		elsif des == 'a' && orig == 'b' 
 			a << b.pop
 		elsif des == 'a' && orig == 'c'
@@ -79,7 +78,7 @@ def towers
 		elsif des == 'b' && orig == 'a' 
 			b << a.pop
 		elsif des == 'b' && orig == 'c'
-			b << c.pop
+		b  << c.pop
 		elsif des == 'c' && orig == 'a'
 			c << a.pop
 		elsif des == 'c' && orig == 'b'
