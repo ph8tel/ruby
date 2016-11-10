@@ -1,23 +1,33 @@
-# Write a method `wonky_coins(n)` that returns the number of coins you
+# github.com/ph8tel
+
+# The method `wonky_coins(n)` that returns the number of coins you
 # are left with if you take all non-zero coins and keep feeding them
 # back into the machine until you are left with only zero-value coins.
-#
-# Difficulty: 3/5
 
 def wonky_coins(num)
-a =[]
+a = diver(num)
+puts "a first is #{a}"
+
+a.each {|x| a << diver(x)}
+p a
+ 
+end
+
+def diver(int)
+	arr = []
 3.times do 
 	|x|
-	puts " a is #{a} x + 2 is #{x + 2}"
-	 a << (num / (x + 2) ).to_i
+	#puts "x is #{x}"
+	#puts " a is #{a} x + 2 is #{x + 2}"
+	 if x != 0
+	 arr << ( int / (x + 2) ).to_i
+
+	end
 end
-puts "a is #{a}"
-puts "here"
-if a[-1] > 0
-	a << an(a)
+puts "returning is #{arr}"
+arr
 end
-a.length
-end
+
 
 def an(arr)
 	v = []
@@ -30,3 +40,10 @@ if !arr[-3, 3].include?(0)
 end
 end
 p wonky_coins(6)
+
+
+# puts "here"
+# if a[-1] > 0
+# 	a << an(a)
+# end
+# a.length
