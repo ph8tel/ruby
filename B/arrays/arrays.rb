@@ -40,45 +40,67 @@ def towers_oVal(orig, a, b, c)
 		when 'b' then	oVal =   b[-1]
 		when 'c' then	oVal =   c[-1]
 		else
-			return nil
+			return "error"
 	end
 oVal
 end
 def towers_dVal(des, a, b, c)
 
+dVal = 0
 	case des
 		when 'a' then dVal = a[-1]
 		when 'b' then dVal = b[-1]
 		when 'c' then dVal = c[-1]
 		else
-			return nil
+			return "error"
 	end
-	
-	if !a.last || !b.last || !c.last
 	dVal = 10 if !dVal
 dVal
 end
 
+def towers_display(a, b, c, goal)
+	# p a[0]
+	# a.sort! {|x, y| y <=> x}
+	# b.sort! {|x, y| y <=> x}
+	# c.sort! {|x, y| y <=> x}
+	# p a[0]
+idx = goal - 1
+while idx >= 0
+	
+     puts "#{ !a[idx] ? '|' : a[idx] } #{ !b[idx] ? '|' : b[idx] } #{ !c[idx] ? '|' : c[idx ]}" 
+		idx -= 1
+		end
+puts "A B C"
+end
+
 def towers
-	a = [3,2,1]
-	b = []
-	c = []
+puts "This is the Hanoi Towers game"
+puts "Move the complete stack to another tower."
+puts "The number moved can not be more than the "
+puts "value it is placed on."
+puts ""
+puts "How difficult? 1 - ??"
+goal = Integer(gets) rescue false
+puts "fail" if !goal
 
-	until b.length == 3 || c.length == 3
-		puts "Current: A:#{a} B:#{b} C:#{c}"
-		orig = 'd'
-	#while orig.include?('a' ||'b'||'c'||'d')
-		puts "move from:"
+a = (1..goal).to_a.sort {|x, y| y <=>x} 
+b = Array.new
+c = Array.new
+
+	until b[goal - 1] || c[goal - 1]
+		towers_display(a, b, c, goal)
+puts " #{a} #{b} #{c}"
+		puts "move from (a-c):"
 		orig = gets.chomp
-		oVal = towers_oVal(orig, a, b, c)
-
-		puts "move to:"
+		oVal = towers_oVal(orig.downcase, a, b, c)
+p oVal
+		puts "move to (a-c):"
 		des = gets.chomp
-		dVal= towers_dVal(des, a, b, c)
-		
-			if !oVal || !dVal
-				puts "bad input"   
-			elsif	oVal > dVal
+		dVal= towers_dVal(des.downcase, a, b, c)
+p dVal
+		if dVal == 'error' || oVal == 'error'
+			puts "Invalid input"
+		elsif  oVal < dVal
 				if des == 'a' && orig == 'b' 
 					a << b.pop
 				elsif des == 'a' && orig == 'c'
@@ -92,9 +114,14 @@ def towers
 				elsif des == 'c' && orig == 'b'
 					c << b.pop
 				end
+			else
+				puts "Illegal move."
 			end
 	end
+	towers_display(a, b, c, goal)
+
 	puts "You won! bye"
+
 end	
 
 towers
