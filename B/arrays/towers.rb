@@ -1,32 +1,3 @@
-
-#Write a method that mimics .uniq
-def my_uniq(arr)
-ret = Array.new
-	arr.each {|arr_item| ret << arr_item if !ret.include?(arr_item)}
-	p ret
-end
-#my_uniq([1, 2, 1, 3, 3]) == [1, 2, 3]
-
-#Write a method that finds if an array of numbers has a pair 
-#that sums to zero. Be careful of the case
- #of zero; there need to be two zeroes in the array 
- #to make a pair that sums to zero.
-def zero_sum(arr)
-	r = false
- if arr.select {|x| x == 0 }.length > 1
- 	puts "caught 00S"
- 	return true
- end
-	arr.each do |num|
-		if num != 0
-       b = arr.select {|x| x != num }
-      		b.each { |y| r = true if (num + y) == 0 }
-  	end
-	end
-r 
-end
-#p zero_sum([1, 2, 1, 3, 3, -1]) == true
-
 # Keep three arrays, which represents the piles of discs.
 # Pick a representation of the discs to store in the arrays;
 #  maybe just a number representing their size.
@@ -87,36 +58,35 @@ c = Array.new
 puts " #{a} #{b} #{c}"
 		puts "move from (a-c):"
 		orig = gets.chomp
-		oVal = towers_oVal(orig.downcase, a, b, c)
-p oVal
+# 		oVal = towers_oVal(orig.downcase, a, b, c)
+# p oVal
 		puts "move to (a-c):"
 		des = gets.chomp
-		dVal= towers_dVal(des.downcase, a, b, c)
-p dVal
-		if dVal == 'error' || oVal == 'error'
-			puts "Invalid input"
-		elsif  oVal < dVal
-				if des == 'a' && orig == 'b' 
-					a << b.pop
-				elsif des == 'a' && orig == 'c'
-					a << c.pop
-				elsif des == 'b' && orig == 'a' 
-					b << a.pop
-				elsif des == 'b' && orig == 'c'
-					b  << c.pop
-				elsif des == 'c' && orig == 'a'
-					c << a.pop
-				elsif des == 'c' && orig == 'b'
-					c << b.pop
-				end
-			else
-				puts "Illegal move."
+# 		dVal= towers_dVal(des.downcase, a, b, c)
+# p dVal
+		# if dVal == 'error' || oVal == 'error'
+		# 	puts "Invalid input"
+		# els
+		if  oVal < dVal
+			case des
+				when 'a' && orig == 'b'
+					a << b.pop if a.last > b.last
+				when 'a' && orig == 'c' 
+					a << c.pop if a.last > c.last
+				when 'b' && orig == 'a'
+				  b << a.pop if b.last > a.last
+				when 'b' && orig == 'c' 
+					b << c.pop if b.last > c.last
+				when 'c' && orig == 'a' 
+					c << a.pop if c.last > a.last
+				when 'c' && orig == 'b' then c << b.pop
+				else
+					puts "Bad input"
 			end
+		end
 	end
-	towers_display(a, b, c, goal)
-
-	puts "You won! bye"
-
+towers_display(a, b, c, goal)
+puts "You won! bye"
 end	
 
 towers
