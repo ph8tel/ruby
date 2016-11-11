@@ -1,3 +1,5 @@
+# github.com/ph8tel
+
 require '../no_repeat'
 require 'rspec'
 
